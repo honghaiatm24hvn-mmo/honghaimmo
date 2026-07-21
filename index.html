@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hồng Hải Media - Kho 1500+ Tài Nguyên & Tool MMO Tự Động</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root[data-theme="dark"] {
+            --bg-deep: #090d16;
+            --bg-card: #121824;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --primary: #ff5722;
+            --primary-gradient: linear-gradient(135deg, #ff784e 0%, #ff5722 100%);
+            --accent-glow: 0 0 25px rgba(255, 87, 34, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --tag-bg: rgba(255, 255, 255, 0.05);
+            --dropdown-bg: #161e2e;
+            --pink-accent: #ff708c;
+            --pink-gradient: linear-gradient(135deg, #ff8da1 0%, #ff577e 100%);
+            --note-bg: rgba(255, 152, 0, 0.08);
+            --note-border: rgba(255, 152, 0, 0.2);
+            --pending: #f59e0b;
+        }
+
+        :root[data-theme="light"] {
+            --bg-deep: #f8fafc;
+            --bg-card: #ffffff;
+            --border-glass: rgba(0, 0, 0, 0.08);
+            --primary: #ff5722;
+            --primary-gradient: linear-gradient(135deg, #ff784e 0%, #ff5722 100%);
+            --accent-glow: 0 0 25px rgba(255, 87, 34, 0.2);
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --success: #059669;
+            --danger: #dc2626;
+            --tag-bg: #f1f5f9;
+            --dropdown-bg: #ffffff;
+            --pink-accent: #ff577e;
+            --pink-gradient: linear-gradient(135deg, #ff8da1 0%, #ff577e 100%);
+            --note-bg: #fffbf2;
+            --note-border: #ffeeba;
+            --pending: #d97706;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- HIỆU ỨNG MENU CẦU VỒNG (RGB RAINBOW ANIMATION) --- */
+        @keyframes rainbowGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        nav a, .logo-text, .top-announcement-bar {
+            animation: rainbowGlow 6s linear infinite;
+        }
+
+        /* --- HIỆU ỨNG TUYẾT RƠI (SNOWFALL) --- */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            background: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4500;
+            opacity: 0.8;
+            animation: fallSnow linear infinite;
+        }
+
+        @keyframes fallSnow {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(50vh) translateX(15px);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(105vh) translateX(-15px);
+                opacity: 0;
+            }
+        }
+
+        /* Top Announcement Bar */
+        .top-announcement-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: var(--primary-gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1001;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .top-bar-text {
+            white-space: nowrap;
+            animation: scrollText 25s linear infinite; 
+            padding-left: 100%;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-glass);
+            position: fixed;
+            top: 30px;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: var(--accent-glow);
+            animation: modernRotate 6s linear infinite;
+        }
+
+        @keyframes modernRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.08); filter: hue-rotate(15deg); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            background: linear-gradient(135deg, var(--text-main) 40%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav { display: none; gap: 20px; align-items: center; }
+        nav a { font-size: 13px; font-weight: 600; color: var(--text-sub); cursor: pointer; transition: color 0.2s ease, transform 0.2s ease; }
+        nav a:hover, nav a.active { color: var(--primary); transform: translateY(-1px); }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-auth-outline {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 6px 12px;
+            transition: opacity 0.2s;
+        }
+        .btn-auth-outline:hover { opacity: 0.7; }
+
+        .btn-auth-primary {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-auth-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 87, 34, 0.4);
+        }
+
+        .utility-box {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            background: var(--tag-bg);
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+        .utility-box select {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 11px;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+        }
+        .utility-box select option { background: var(--dropdown-bg); color: var(--text-main); }
+        .theme-toggle-btn { background: transparent; border: none; font-size: 14px; cursor: pointer; transition: transform 0.3s ease; }
+        .theme-toggle-btn:hover { transform: rotate(45deg) scale(1.1); }
+
+        .wrapper {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 110px 12px 50px 12px; 
+        }
+
+        .page-section { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease; 
+        }
+        .page-section.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+
+        /* HERO BANNER & SEARCH */
+        .hero-banner-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: visible; 
+            z-index: 10;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .hero-banner-box:hover {
+            border-color: rgba(255, 87, 34, 0.2);
+            box-shadow: 0 12px 35px rgba(255, 87, 34, 0.08);
+        }
+
+        .hero-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            color: var(--text-sub);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .admin-contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .admin-badge-card {
+            background: var(--tag-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.2s, box-shadow 0.2s;
+        }
+        .admin-badge-card:hover {
+            border-color: rgba(255, 87, 34, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.15);
+        }
+
+        .admin-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .admin-info .label { font-size: 10px; color: var(--text-sub); font-weight: 600; }
+        .admin-info .val { font-size: 12px; color: var(--text-main); font-weight: 700; }
+
+        .search-box-wrap {
+            position: relative;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .search-bar {
+            display: flex;
+            background: var(--bg-deep);
+            border: 2px solid var(--primary);
+            border-radius: 14px;
+            padding: 8px 8px 8px 18px;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .search-bar:focus-within {
+            box-shadow: 0 0 30px rgba(255, 87, 34, 0.4);
+            transform: scale(1.01);
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: var(--primary-gradient);
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .search-bar button:hover {
+            opacity: 0.95;
+            transform: scale(1.03);
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            width: 100%;
+            background: var(--dropdown-bg);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+            max-height: 160px;
+            overflow-y: auto;
+            display: none;
+            z-index: 200;
+            padding: 6px;
+            animation: fadeInDown 0.2s ease forwards;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.15s ease;
+        }
+        .search-row:hover { background: rgba(255, 87, 34, 0.12); transform: translateX(2px); }
+        .search-row-title { font-size: 12px; font-weight: 600; color: var(--text-main); }
+        .search-row-price { font-size: 12px; font-weight: 700; color: var(--primary); }
+
+        /* Filter Controls & Category Filter Tabs */
+        .filter-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-filter-select {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .price-filter-select:hover { border-color: rgba(255, 87, 34, 0.4); }
+
+        .category-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            scrollbar-width: none;
+            position: relative;
+            z-index: 1;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-sub);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .cat-chip:hover {
+            border-color: rgba(255, 87, 34, 0.4);
+            color: var(--text-main);
+            transform: translateY(-2px);
+        }
+        .cat-chip.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* PRODUCT CARD LIST */
+        .product-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.25s, box-shadow 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transition: 0.5s;
+        }
+        .product-card-item:hover::after {
+            left: 100%;
+        }
+
+        .product-card-item:hover {
+            border-color: rgba(255, 87, 34, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 87, 34, 0.1);
+        }
+
+        .card-top-badges {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .badge-auto {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--success);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-discount {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .meta-tag {
+            background: var(--tag-bg);
+            color: var(--text-sub);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-glass);
+            transition: border-color 0.2s;
+        }
+        .meta-tag:hover { border-color: rgba(255, 87, 34, 0.3); }
+        .meta-tag span {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .card-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 10px;
+        }
+
+        .price-area {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .current-price {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .old-and-stock {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .old-price {
+            color: var(--text-sub);
+            text-decoration: line-through;
+        }
+
+        .stock-count {
+            color: var(--success);
+            font-weight: 700;
+        }
+        .stock-count.out {
+            color: var(--danger);
+        }
+
+        .btn-buy-card {
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s, opacity 0.2s;
+        }
+        .btn-buy-card:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.45);
+        }
+
+        .btn-soldout {
+            background: var(--tag-bg);
+            color: var(--text-sub);
+            border: 1px solid var(--border-glass);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: not-allowed;
+        }
+
+        .btn-copy-mini {
+            background: var(--tag-bg);
+            border: 1px solid var(--border-glass);
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .btn-copy-mini:hover { background: rgba(255, 87, 34, 0.15); transform: scale(1.05); }
+
+        /* Pagination */
+        .pagination-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+        }
+        .page-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .page-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+        }
+
+        /* Form & Modal */
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 20px;
+            border-radius: 14px;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .form-card h2 { font-size: 16px; font-weight: 800; margin-bottom: 15px; text-align: center; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 11px; font-weight: 600; color: var(--text-sub); margin-bottom: 4px; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-deep);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 12px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.15);
+        }
+        .form-submit-btn {
+            width: 100%;
+            background: var(--primary-gradient);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .form-submit-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            animation: fadeIn 0.25s ease;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            max-width: 420px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+            animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .stock-box {
+            background: var(--bg-deep);
+            border: 1px dashed var(--primary);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--primary);
+            margin: 10px 0;
+            word-break: break-all;
+            user-select: all;
+        }
+
+        /* CUSTOM DEPOSIT MODAL DESIGN */
+        .deposit-modal-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            animation: fadeIn 0.25s ease;
+        }
+        .deposit-modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            width: 100%;
+            max-width: 440px;
+            max-height: 90vh;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .deposit-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .deposit-close-btn:hover { background: rgba(255,87,126,0.15); transform: rotate(90deg); }
+
+        .deposit-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+        .deposit-notice-card {
+            background: var(--note-bg);
+            border: 1px solid var(--note-border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+        .deposit-notice-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #d97706;
+            margin-bottom: 8px;
+        }
+        .deposit-notice-list {
+            font-size: 11px;
+            color: var(--text-sub);
+            line-height: 1.5;
+            padding-left: 14px;
+        }
+        .deposit-notice-list li { margin-bottom: 6px; }
+        .deposit-notice-list strong { color: var(--text-main); }
+
+        .deposit-section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .deposit-amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .deposit-preset-btn {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+        .deposit-preset-btn:hover { transform: translateY(-2px); }
+        .deposit-preset-btn.active, .deposit-preset-btn:hover {
+            border-color: var(--pink-accent);
+            background: rgba(255, 87, 126, 0.08);
+            color: var(--pink-accent);
+        }
+
+        .deposit-input-custom {
+            width: 100%;
+            background: var(--bg-deep);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            margin-bottom: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .deposit-input-custom:focus { 
+            border-color: var(--pink-accent); 
+            box-shadow: 0 0 10px rgba(255, 87, 126, 0.2);
+        }
+
+        .btn-pink-action {
+            width: 100%;
+            background: var(--pink-gradient);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 87, 126, 0.35);
+            transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+            animation: pulsePink 3s infinite;
+        }
+        .btn-pink-action:hover { 
+            opacity: 0.95; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 87, 126, 0.5);
+        }
+
+        @keyframes pulsePink {
+            0% { box-shadow: 0 0 0 0 rgba(255, 87, 126, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 87, 126, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 87, 126, 0); }
+        }
+
+        .bank-info-table {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 4px 12px;
+            margin-bottom: 15px;
+        }
+        .bank-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+            font-size: 12px;
+        }
+        .bank-info-row:last-child { border-bottom: none; }
+        .bank-row-title { color: var(--text-sub); }
+        .bank-row-val { font-weight: 700; color: var(--text-main); text-align: right; display: flex; align-items: center; gap: 6px; }
+
+        .qr-box-center {
+            text-align: center;
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            width: 180px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .qr-box-center img { width: 150px; height: 150px; display: block; margin: 0 auto; }
+        .qr-subtext { text-align: center; font-size: 11px; color: var(--text-sub); margin-bottom: 12px; }
+
+        .content-transfer-box {
+            background: rgba(255, 87, 126, 0.08);
+            border: 1px solid var(--pink-accent);
+            border-radius: 10px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .transfer-content-text {
+            font-family: monospace;
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--pink-accent);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-check-deposit-history {
+            background: var(--tag-bg);
+            border: 1px solid var(--pink-accent);
+            color: var(--pink-accent);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .btn-check-deposit-history:hover {
+            background: rgba(255, 87, 126, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .badge-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--pending);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .modern-toast-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.25s ease;
+        }
+        .modern-toast-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-icon-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--pink-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            color: #fff;
+            font-size: 26px;
+            box-shadow: 0 0 25px rgba(255, 87, 126, 0.5);
+            animation: bounceIcon 1.5s infinite ease-in-out;
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.45);
+            cursor: pointer;
+            z-index: 999;
+            border: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .floating-chat:hover { transform: scale(1.15) rotate(10deg); }
+
+        /* --- CSS CHO WELCOME POPUP --- */
+        .welcome-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .welcome-popup-box {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(255, 87, 34, 0.3);
+            position: relative;
+            animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .welcome-close-x {
+            position: absolute;
+            top: 12px; right: 15px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; cursor: pointer;
+            transition: 0.2s;
+        }
+        .welcome-close-x:hover { background: var(--primary); color: #fff; transform: rotate(90deg); }
+        .welcome-icon-badge {
+            width: 65px; height: 65px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 28px; font-weight: 800;
+            margin: 0 auto 15px auto;
+            box-shadow: var(--accent-glow);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 11px;
+            color: var(--text-sub);
+            border-top: 1px solid var(--border-glass);
+            margin-top: 30px;
+        }
+
+        @media(min-width: 768px) {
+            nav { display: flex; }
+            .wrapper { max-width: 800px; }
+            .search-dropdown { max-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- POPUP CHÀO MỪNG QUÝ KHÁCH -->
+    <div id="welcome-popup" class="welcome-popup-overlay">
+        <div class="welcome-popup-box">
+            <div class="welcome-close-x" onclick="closeWelcomePopup()">✕</div>
+            <div class="welcome-icon-badge">H</div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">Xin chào quý khách!</h3>
+            <p style="font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 12px;">Mình là Hồng Hải MMO</p>
+            <p style="font-size: 12px; color: var(--text-sub); line-height: 1.6; margin-bottom: 20px;">
+                Chào mừng bạn đến với kho tài nguyên & tool MMO tự động uy tín hàng đầu. Thành lập ngày <strong>21/7/2026</strong>.<br>
+                Hỗ trợ nhanh qua TikTok <strong>@cleo.honghai</strong> hoặc Zalo <strong>0866057398</strong>!
+            </p>
+            <button class="btn-auth-primary" style="width: 100%; padding: 12px; font-size: 14px;" onclick="closeWelcomePopup()">Khám phá ngay ⚡</button>
+        </div>
+    </div>
+
+    <!-- THANH THÔNG BÁO CHẠY CHỮ -->
+    <div class="top-announcement-bar">
+        <div class="top-bar-text">
+            🎉 Xin chào Quý khách! Đây là tạp hóa chuyên MMO, cung cấp đầy đủ các sản phẩm dịch vụ, Via, Clone, Tool tự động 24/7 cho quý khách lựa chọn. Chúc quý khách giao dịch thành công! 🎉
+        </div>
+    </div>
+
+    <!-- HEADER MENU CHÍNH -->
+    <header>
+        <div class="logo-area" onclick="switchTab('shop')">
+            <div class="logo-icon">H</div>
+            <div class="logo-text">Hồng Hải Media</div>
+        </div>
+        <nav>
+            <a onclick="switchTab('shop')" class="active" id="nav-shop">Trang chủ</a>
+            <a onclick="switchTab('shop')">Sản phẩm ▾</a>
+            <a onclick="switchTab('lookup')">Tra cứu</a>
+            <a onclick="openDepositModal()" style="color:var(--pink-accent); font-weight:800;">Nạp tiền</a>
+            <a onclick="switchTab('history')">Lịch sử <span id="history-badge" style="background:var(--primary); color:#fff; border-radius:10px; padding:1px 6px; font-size:9px;">0</span></a>
+        </nav>
+        <div class="header-right">
+            <button class="btn-pink-action" style="padding:6px 12px; font-size:12px; border-radius:8px; width:auto; animation:none;" onclick="openDepositModal()">💳 Nạp tiền</button>
+            <div class="utility-box">
+                <select id="currency-select" onchange="changeCurrency(this.value)">
+                    <option value="VND">VNĐ</option>
+                    <option value="USD">USD</option>
+                </select>
+                <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">☀️</button>
+            </div>
+            <div id="auth-slot" style="display:flex; gap:4px;">
+                <button class="btn-auth-outline" onclick="switchTab('login')">Đăng nhập</button>
+                <button class="btn-auth-primary" onclick="switchTab('register')">Đăng ký</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MODAL MUA HÀNG THÀNH CÔNG -->
+    <div id="stock-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="color: var(--success); font-size: 15px; font-weight: 800; margin-bottom: 6px;">✓ Thanh toán thành công!</h3>
+            <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 8px;">Thông tin tài khoản / Key bản quyền của bạn (Đã lưu lịch sử):</p>
+            <div class="stock-box" id="modal-stock-data">uid|pass|token</div>
+            <div style="display:flex; gap:8px;">
+                <button class="form-submit-btn" style="background:var(--tag-bg); color:var(--text-main); border:1px solid var(--border-glass);" onclick="copyToClipboard(document.getElementById('modal-stock-data').innerText)">📋 Sao chép Key</button>
+                <button class="form-submit-btn" onclick="closeModal()">Đã lưu / Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NẠP TIỀN HOÀN CHỈNH -->
+    <div id="deposit-modal" class="deposit-modal-container">
+        <div class="deposit-modal-box">
+            <div class="deposit-close-btn" onclick="closeDepositModal()">✕</div>
+            
+            <div id="deposit-step-1">
+                <div class="deposit-header-title">
+                    <span style="font-size:18px;">🏛️</span> Thông tin chuyển khoản
+                </div>
+
+                <div class="deposit-notice-card">
+                    <div class="deposit-notice-title">LƯU Ý QUAN TRỌNG</div>
+                    <ul class="deposit-notice-list">
+                        <li>Ghi <strong>sai nội dung</strong> chuyển khoản sẽ <strong>không được cộng số dư</strong> và <strong>không được hoàn trả</strong>.</li>
+                        <li>Chuyển đúng hạn mức hệ thống hỗ trợ.</li>
+                    </ul>
+                </div>
+
+                <div class="deposit-section-label">Số tiền muốn nạp</div>
+                <div class="deposit-amount-grid">
+                    <div class="deposit-preset-btn" onclick="selectDepositAmount(50000)">50.000 đ</div>
+                    <div class="deposit-preset-btn active" onclick="selectDepositAmount(100000)">100.000 đ</div>
+                    <div class="deposit-preset-btn" onclick="selectDepositAmount(200000)">200.000 đ</div>
+                    <div class="deposit-preset-btn" onclick="selectDepositAmount(500000)">500.000 đ</div>
+                    <div class="deposit-preset-btn" onclick="selectDepositAmount(1000000)">1.000.000 đ</div>
+                    <div class="deposit-preset-btn" onclick="selectDepositAmount(2000000)">2.000.000 đ</div>
+                </div>
+
+                <input type="number" id="deposit-custom-input" class="deposit-input-custom" value="100000" placeholder="Hoặc nhập số tiền (tối thiểu 10.000đ)" oninput="updatePresetHighlight(this.value)">
+
+                <button class="btn-pink-action" onclick="proceedToDepositDetails()">Lấy thông tin CK</button>
+
+                <button class="btn-check-deposit-history" onclick="openDepositHistoryModal()">
+                    🔍 Kiểm tra lịch sử nạp tiền
+                </button>
+            </div>
+
+            <!-- STEP 2: THÔNG TIN CHI TIẾT CHUYỂN KHOẢN -->
+            <div id="deposit-step-2" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div class="deposit-header-title" style="margin-bottom:0;">
+                        <span style="font-size:18px;">🏛️</span> Thông tin chuyển khoản
+                    </div>
+                    <div style="display:flex; gap:12px; font-size:11px; color:var(--text-sub); cursor:pointer;">
+                        <span onclick="resetDepositStep()" style="display:flex; align-items:center; gap:2px;">🔄 Đổi số tiền</span>
+                    </div>
+                </div>
+
+                <div class="bank-info-table">
+                    <div class="bank-info-row">
+                        <span class="bank-row-title">Ngân hàng</span>
+                        <span class="bank-row-val">VPB</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span class="bank-row-title">Số tài khoản</span>
+                        <span class="bank-row-val">
+                            <span id="txt-stk">AGBHENO60707154950</span>
+                            <button class="btn-copy-mini" onclick="copyToClipboard('AGBHENO60707154950')">Copy</button>
+                        </span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span class="bank-row-title">Chủ tài khoản</span>
+                        <span class="bank-row-val">HOANG GIA DU</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span class="bank-row-title">Số tiền</span>
+                        <span class="bank-row-val" style="color:var(--pink-accent);">
+                            <span id="txt-amount-val">100.000 đ</span>
+                            <button class="btn-copy-mini" onclick="copyToClipboard(document.getElementById('txt-amount-val').innerText)">Copy</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="qr-box-center">
+                    <img id="dynamic-qr-img" src="" alt="VietQR">
+                </div>
+                <div class="qr-subtext">Quét QR để chuyển khoản</div>
+
+                <div style="font-size:11px; color:var(--text-sub); margin-bottom:4px;">Nội dung chuyển khoản</div>
+                <div class="content-transfer-box">
+                    <span id="txt-transfer-content" class="transfer-content-text">NAPTIEN 100000</span>
+                    <button class="btn-copy-mini" onclick="copyToClipboard(document.getElementById('txt-transfer-content').innerText)">Copy</button>
+                </div>
+
+                <button class="btn-pink-action" onclick="submitDepositDone()">Tôi đã chuyển khoản</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LỊCH SỬ NẠP TIỀN -->
+    <div id="deposit-history-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 520px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main);">📜 Lịch sử nạp tiền của bạn</h3>
+                <span onclick="closeDepositHistoryModal()" style="font-size: 18px; cursor: pointer; color: var(--text-sub); font-weight: 700;">✕</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">Các lệnh nạp tiền mới tạo sẽ ở trạng thái <strong style="color:var(--pending);">Đang xử lý</strong> và chưa được cộng tiền tự động.</p>
+            <div style="background:var(--bg-deep); border:1px solid var(--border-glass); border-radius:10px; overflow-x:auto; padding:6px; max-height:280px; overflow-y:auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left;">
+                    <thead>
+                        <tr style="color:var(--text-sub); border-bottom:1px solid var(--border-glass);">
+                            <th style="padding:8px;">Mã GD</th>
+                            <th style="padding:8px;">Số tiền</th>
+                            <th style="padding:8px;">Nội dung</th>
+                            <th style="padding:8px;">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deposit-history-tbody">
+                        <tr><td colspan="4" style="text-align:center; padding:15px; color:var(--text-sub);">Chưa có lịch sử nạp tiền nào.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="form-submit-btn" style="margin-top: 15px;" onclick="closeDepositHistoryModal()">Đóng cửa sổ</button>
+        </div>
+    </div>
+
+    <!-- THÔNG BÁO XỬ LÝ -->
+    <div id="modern-toast" class="modern-toast-overlay">
+        <div class="modern-toast-card">
+            <div class="toast-icon-circle">⏳</div>
+            <h3 style="font-size:16px; font-weight:800; margin-bottom:8px; color:var(--text-main);">Đã ghi nhận giao dịch</h3>
+            <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:20px;">
+                Hệ thống đã ghi nhận lệnh nạp của bạn. Trạng thái hiện tại là <strong>Đang xử lý</strong> và số dư chưa được cộng.
+            </p>
+            <button class="btn-pink-action" onclick="closeModernToast()">Kiểm tra lịch sử nạp</button>
+        </div>
+    </div>
+
+    <div class="wrapper">
+
+        <div id="shop" class="page-section active">
+            
+            <div class="hero-banner-box">
+                <div class="hero-title">Hồng Hải Media - Hệ Thống Tài Nguyên MMO & Dịch Vụ Số</div>
+                <div class="hero-subtitle">Cung cấp hệ thống tài khoản Via, Clone, TikTok, Tool MMO, Proxy uy tín hàng đầu Việt Nam. Giao dịch tự động 24/7, xuất kho ngay lập tức.</div>
+                
+                <div class="admin-contacts-grid">
+                    <div class="admin-badge-card" onclick="window.open('https://tiktok.com/@cleo.honghai', '_blank')" style="cursor:pointer;">
+                        <div class="admin-icon">TK</div>
+                        <div class="admin-info">
+                            <div class="label">TikTok Admin</div>
+                            <div class="val">@cleo.honghai</div>
+                        </div>
+                    </div>
+                    <div class="admin-badge-card" onclick="alert('Zalo Admin: 0866057398')" style="cursor:pointer;">
+                        <div class="admin-icon">Z</div>
+                        <div class="admin-info">
+                            <div class="label">Zalo Hỗ Trợ</div>
+                            <div class="val">0866057398</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px; display:flex; gap:8px;">
+                    <button class="btn-pink-action" style="flex:1;" onclick="openDepositModal()">💳 Nạp tiền ngay</button>
+                    <button class="btn-check-deposit-history" style="flex:1; margin-top:0;" onclick="openDepositHistoryModal()">🔍 Lịch sử nạp tiền</button>
+                </div>
+
+                <div class="search-box-wrap">
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="🔍 Nhập tên sản phẩm, via, tiktok, proxy cần tìm..." oninput="handleSearch(this.value)">
+                        <button onclick="executeSearch()">Tìm kiếm</button>
+                    </div>
+                    <div id="search-dropdown" class="search-dropdown"></div>
+                </div>
+            </div>
+
+            <div class="filter-controls-row">
+                <select id="price-filter" class="price-filter-select" onchange="filterByPrice(this.value)">
+                    <option value="all">💰 Tất cả mức giá</option>
+                    <option value="under50">Dưới 50.000 đ</option>
+                    <option value="50to200">50.000 đ - 200.000 đ</option>
+                    <option value="over200">Trên 200.000 đ</option>
+                </select>
+            </div>
+
+            <div class="category-scroll" id="category-chips">
+                <div class="cat-chip active" onclick="filterCat('all', this)">Tất cả (1500+)</div>
+                <div class="cat-chip" onclick="filterCat('Facebook', this)">Facebook / Via / Clone</div>
+                <div class="cat-chip" onclick="filterCat('TikTok', this)">TikTok Viral</div>
+                <div class="cat-chip" onclick="filterCat('Tool MMO', this)">Tool MMO Auto</div>
+                <div class="cat-chip" onclick="filterCat('AI & ChatGPT', this)">AI & ChatGPT Plus</div>
+                <div class="cat-chip" onclick="filterCat('Proxy & VPS', this)">Proxy & VPS</div>
+                <div class="cat-chip" onclick="filterCat('Telegram', this)">Telegram</div>
+            </div>
+
+            <div class="product-list-container" id="product-list-slot"></div>
+            <div class="pagination-bar" id="pagination-slot"></div>
+        </div>
+
+        <div id="lookup" class="page-section">
+            <div class="form-card">
+                <h2>Tra Cứu Đơn Hàng & Tài Khoản</h2>
+                <div class="form-group">
+                    <label>Mã đơn hàng hoặc Tên tài khoản</label>
+                    <input type="text" id="lookup-query" placeholder="Ví dụ: HHM4821">
+                </div>
+                <button class="form-submit-btn" onclick="doLookup()">Kiểm tra</button>
+                <div id="lookup-result" style="margin-top:12px; font-size:11px; display:none; background:var(--bg-deep); padding:10px; border-radius:8px;"></div>
+            </div>
+        </div>
+
+        <div id="history" class="page-section">
+            <h2 style="font-size:16px; font-weight:800; margin-bottom:12px;">Lịch Sử Giao Dịch Mua Sản Phẩm</h2>
+            <div style="background:var(--bg-card); border:1px solid var(--border-glass); border-radius:12px; overflow-x:auto; padding:10px;">
+                <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left;">
+                    <thead>
+                        <tr style="color:var(--text-sub); border-bottom:1px solid var(--border-glass);">
+                            <th style="padding:8px;">Mã đơn</th>
+                            <th style="padding:8px;">Sản phẩm</th>
+                            <th style="padding:8px;">Giá</th>
+                            <th style="padding:8px;">Thông tin / Key</th>
+                            <th style="padding:8px;">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <tr><td colspan="5" style="text-align:center; padding:15px; color:var(--text-sub);">Chưa có giao dịch mua hàng nào.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FORM ĐĂNG NHẬP -->
+        <div id="login" class="page-section">
+            <div class="form-card">
+                <h2>Đăng Nhập Hệ Thống</h2>
+                <div class="form-group"><label>Tên đăng nhập hoặc Email</label><input type="text" id="login-user" placeholder="Nhập tài khoản..."></div>
+                <div class="form-group"><label>Mật khẩu</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+                <button class="form-submit-btn" onclick="handleLogin()">Đăng Nhập</button>
+                <p style="text-align:center; margin-top:12px; font-size:11px; color:var(--text-sub);">Chưa có tài khoản? <a style="color:var(--primary); cursor:pointer;" onclick="switchTab('register')">Đăng ký</a></p>
+            </div>
+        </div>
+
+        <!-- FORM ĐĂNG KÝ -->
+        <div id="register" class="page-section">
+            <div class="form-card">
+                <h2>Đăng Ký Thành Viên</h2>
+                <div class="form-group"><label>Tên hiển thị</label><input type="text" id="reg-name" placeholder="Họ tên của bạn"></div>
+                <div class="form-group"><label>Tên đăng nhập (Duy nhất)</label><input type="text" id="reg-user" placeholder="Tên đăng nhập..."></div>
+                <div class="form-group"><label>Email (Mỗi email 1 tài khoản)</label><input type="email" id="reg-email" placeholder="Email của bạn..."></div>
+                <div class="form-group"><label>Mật khẩu</label><input type="password" id="reg-pass" placeholder="••••••••"></div>
+                <button class="form-submit-btn" onclick="handleRegister()">Đăng Ký</button>
+                <p style="text-align:center; margin-top:12px; font-size:11px; color:var(--text-sub);">Đã có tài khoản? <a style="color:var(--primary); cursor:pointer;" onclick="switchTab('login')">Đăng nhập</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="floating-chat" onclick="alert('Zalo Admin: 0866057398 | TikTok: @cleo.honghai')" title="Hỗ trợ 24/7">💬</button>
+
+    <footer>
+        <p>HongHaimedia.vn &copy; 2026 - Hệ thống tự động hóa tài nguyên MMO & Dịch vụ số</p>
+    </footer>
+
+    <script>
+        // Hàm đóng popup chào mừng và kích hoạt hiệu ứng tuyết rơi
+        function closeWelcomePopup() {
+            document.getElementById('welcome-popup').style.display = 'none';
+            startSnowfall(); // Kích hoạt hiệu ứng tuyết rơi khi bấm đóng
+        }
+
+        // Hàm tạo hiệu ứng tuyết rơi
+        function startSnowfall() {
+            const snowflakeCount = 55; // Số lượng bông tuyết
+            for (let i = 0; i < snowflakeCount; i++) {
+                let snow = document.createElement('div');
+                snow.classList.add('snowflake');
+                
+                // Random kích thước, vị trí xuất hiện, tốc độ rơi và độ mờ
+                let size = Math.random() * 6 + 3 + 'px';
+                snow.style.width = size;
+                snow.style.height = size;
+                snow.style.left = Math.random() * 100 + 'vw';
+                snow.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Tốc độ rơi từ 3 đến 7 giây
+                snow.style.animationDelay = (Math.random() * 5) + 's';
+                snow.style.opacity = Math.random() * 0.7 + 0.3;
+
+                document.body.appendChild(snow);
+            }
+        }
+
+        const categories = ['Facebook', 'TikTok', 'Tool MMO', 'AI & ChatGPT', 'Proxy & VPS', 'Telegram'];
+        let products = [];
+
+        for (let i = 1; i <= 1500; i++) {
+            let cat = categories[(i - 1) % categories.length];
+            let price = Math.floor(Math.random() * 380 + 20) * 1000;
+            let oldPrice = price + Math.floor(Math.random() * 150 + 30) * 1000;
+            let stockNum = Math.floor(Math.random() * 500);
+            let discount = Math.floor(Math.random() * 30 + 10);
+
+            let title = "";
+            let tags = [];
+            if (cat === 'Facebook') {
+                title = `Acc Việt Cổ / Via Kháng Khóa - Có ${Math.floor(Math.random()*4000+200)} bạn bè #` + i;
+                tags = [
+                    `Bạn bè • ${Math.floor(Math.random()*2000+100)} - 5000`,
+                    `Năm tạo • ${Math.floor(Math.random()*6+2018)} - 2024`,
+                    `Quốc gia • Việt Nam`
+                ];
+            } else if (cat === 'TikTok') {
+                title = `Tài khoản TikTok Ngoại Viral - Mail Die / Live OAuth2 #` + i;
+                tags = [
+                    `Quốc gia • ${['Brazil', 'Indonesia', 'Thái Lan', 'Pháp', 'Mỹ'][i%5]}`,
+                    `Tuổi • > ${i%6 + 1} tháng`,
+                    `Verify • Mail Die`
+                ];
+            } else if (cat === 'Tool MMO') {
+                title = `Tool Auto Seeding & Nuôi Nick Đa Luồng Bản Pro v${(i%5)+1}.0 #` + i;
+                tags = [
+                    `Bản quyền • Vĩnh viễn`,
+                    `Cập nhật • Miễn phí`,
+                    `Hỗ trợ • 24/7`
+                ];
+            } else if (cat === 'AI & ChatGPT') {
+                title = `Tài khoản ChatGPT Plus Riêng Tư / API Key Limit Cao #` + i;
+                tags = [
+                    `Loại • Account Riêng`,
+                    `Bảo hành • Đủ tháng`,
+                    `Truy cập • 4.0 & o1`
+                ];
+            } else if (cat === 'Proxy & VPS') {
+                title = `Proxy Việt Nam / US Tốc Độ Cao Sạch 100% #` + i;
+                tags = [
+                    `Giao thức • SOCKS5/HTTP`,
+                    `Băng thông • Không giới hạn`,
+                    `Uptime • 99.9%`
+                ];
+            } else {
+                title = `Tài khoản Telegram Trust Cao Hoạt Động Lâu Năm #` + i;
+                tags = [
+                    `Loại • TData / Session`,
+                    `Quốc gia • Random`,
+                    `Bảo hành • Login`
+                ];
+            }
+
+            products.push({
+                id: i,
+                name: title,
+                category: cat,
+                price: price,
+                oldPrice: oldPrice,
+                stock: stockNum,
+                discount: discount,
+                tags: tags,
+                stockData: `HHM_UID_${i}|PASS_${Math.random().toString(36).substring(7)}|TOKEN_SECURE_${i}`
+            });
+        }
+
+        let currentUser = null;
+        let activeCat = 'all';
+        let priceFilterValue = 'all';
+        let currentPage = 1;
+        let pageSize = 12;
+        let currentCurrency = 'VND';
+
+        window.onload = function() {
+            let saved = localStorage.getItem('hhm_current_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+            }
+            renderStore();
+            updateAuthSlot();
+        }
+
+        function formatMoney(vnd) {
+            if (currentCurrency === 'USD') return '$' + (vnd / 25000).toFixed(2);
+            return vnd.toLocaleString('vi-VN') + ' đ';
+        }
+
+        function changeCurrency(cur) {
+            currentCurrency = cur;
+            renderStore();
+        }
+
+        function toggleTheme() {
+            let html = document.documentElement;
+            let btn = document.getElementById('theme-btn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                btn.innerText = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerText = '☀️';
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã sao chép vào bộ nhớ tạm: ' + text);
+            }).catch(err => {
+                alert('Không thể sao chép!');
+            });
+        }
+
+        function filterByPrice(val) {
+            priceFilterValue = val;
+            currentPage = 1;
+            renderStore();
+        }
+
+        function getFilteredProducts() {
+            let list = activeCat === 'all' ? products : products.filter(p => p.category === activeCat);
+            
+            if (priceFilterValue === 'under50') {
+                list = list.filter(p => p.price < 50000);
+            } else if (priceFilterValue === '50to200') {
+                list = list.filter(p => p.price >= 50000 && p.price <= 200000);
+            } else if (priceFilterValue === 'over200') {
+                list = list.filter(p => p.price > 200000);
+            }
+            return list;
+        }
+
+        function renderStore(customList = null, keyword = '') {
+            let container = document.getElementById('product-list-slot');
+            let data = customList || getFilteredProducts();
+            
+            if (data.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-sub); font-size:12px;">Không tìm thấy sản phẩm phù hợp.</div>`;
+                document.getElementById('pagination-slot').innerHTML = '';
+                return;
+            }
+
+            let start = (currentPage - 1) * pageSize;
+            let pageData = data.slice(start, start + pageSize);
+            renderPagination(data.length);
+
+            let html = '';
+            pageData.forEach(p => {
+                let displayName = p.name;
+                if(keyword) {
+                    let regex = new RegExp(`(${keyword})`, 'gi');
+                    displayName = p.name.replace(regex, `<span style="color:var(--primary); background:rgba(255,87,34,0.1);">$1</span>`);
+                }
+
+                let tagsHtml = '';
+                p.tags.forEach(t => {
+                    let parts = t.split('•');
+                    tagsHtml += `<div class="meta-tag">${parts[0]} • <span>${parts[1]}</span></div>`;
+                });
+
+                let buyBtnHtml = p.stock > 0 
+                    ? `<button class="btn-buy-card" onclick="buyItem(${p.id})">⚡ Mua ngay</button>`
+                    : `<button class="btn-soldout" disabled>⚡ Hết hàng</button>`;
+
+                let stockStatusHtml = p.stock > 0 
+                    ? `<span class="stock-count">● Còn ${p.stock}</span>`
+                    : `<span class="stock-count out">● Hết hàng</span>`;
+
+                html += `
+                    <div class="product-card-item">
+                        <div class="card-top-badges">
+                            <div class="badge-auto">⚡ Tự động</div>
+                            <div class="badge-discount">-${p.discount}%</div>
+                        </div>
+                        <div class="product-title">${displayName}</div>
+                        <div class="product-tags-row">${tagsHtml}</div>
+                        <div class="card-bottom-row">
+                            <div class="price-area">
+                                <div class="current-price">${formatMoney(p.price)}</div>
+                                <div class="old-and-stock">
+                                    <span class="old-price">${formatMoney(p.oldPrice)}</span>
+                                    ${stockStatusHtml}
+                                </div>
+                            </div>
+                            <div>${buyBtnHtml}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderPagination(totalItems) {
+            let slot = document.getElementById('pagination-slot');
+            let totalPages = Math.ceil(totalItems / pageSize);
+            if (totalPages <= 1) { slot.innerHTML = ''; return; }
+
+            let html = '';
+            let start = Math.max(1, currentPage - 2);
+            let end = Math.min(totalPages, currentPage + 2);
+
+            for (let i = start; i <= end; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+            slot.innerHTML = html;
+        }
+
+        function goToPage(p) {
+            currentPage = p;
+            renderStore();
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        function filterCat(cat, el) {
+            activeCat = cat;
+            currentPage = 1;
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            renderStore();
+        }
+
+        function handleSearch(kw) {
+            let drop = document.getElementById('search-dropdown');
+            let trimmed = kw.trim().toLowerCase();
+            if(!trimmed) { drop.style.display = 'none'; return; }
+            let matches = products.filter(p => p.name.toLowerCase().includes(trimmed)).slice(0, 6);
+            if(matches.length === 0) {
+                drop.style.display = 'block';
+                drop.innerHTML = `<div style="padding:10px; text-align:center; color:var(--text-sub); font-size:11px;">Không tìm thấy kết quả.</div>`;
+                return;
+            }
+            let html = '';
+            matches.forEach(m => {
+                html += `<div class="search-row" onclick="selectSearch(${m.id})">
+                    <span class="search-row-title">${m.name}</span>
+                    <span class="search-row-price">${formatMoney(m.price)}</span>
+                </div>`;
+            });
+            drop.innerHTML = html;
+            drop.style.display = 'block';
+        }
+
+        function selectSearch(id) {
+            let item = products.find(p => p.id === id);
+            if(item) {
+                document.getElementById('search-dropdown').style.display = 'none';
+                document.getElementById('search-input').value = item.name;
+                renderStore([item], item.name);
+            }
+        }
+
+        function executeSearch() {
+            let kw = document.getElementById('search-input').value.trim();
+            document.getElementById('search-dropdown').style.display = 'none';
+            if(!kw) { renderStore(); return; }
+            let res = products.filter(p => p.name.toLowerCase().includes(kw.toLowerCase()));
+            renderStore(res, kw);
+        }
+
+        document.addEventListener('click', (e) => {
+            if(!e.target.closest('.search-box-wrap')) {
+                let drop = document.getElementById('search-dropdown');
+                if(drop) drop.style.display = 'none';
+            }
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(tabId === 'history') renderHistory();
+        }
+
+        function handleRegister() {
+            let name = document.getElementById('reg-name').value.trim();
+            let username = document.getElementById('reg-user').value.trim();
+            let email = document.getElementById('reg-email').value.trim();
+            let pass = document.getElementById('reg-pass').value.trim();
+
+            if(!name || !username || !email || !pass) {
+                alert('Vui lòng điền đầy đủ tất cả thông tin đăng ký!');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('hhm_users') || '[]');
+            let existing = users.find(u => u.username === username || u.email === email);
+            if (existing) {
+                if (existing.username === username) {
+                    alert('Tên đăng nhập này đã có người sở hữu! Vui lòng chọn tên khác.');
+                } else {
+                    alert('Email này đã được sử dụng để đăng ký tài khoản khác!');
+                }
+                return;
+            }
+
+            let newUser = {
+                name: name,
+                username: username,
+                email: email,
+                password: pass,
+                balance: 0,
+                history: [],
+                depositHistory: []
+            };
+
+            users.push(newUser);
+            localStorage.setItem('hhm_users', JSON.stringify(users));
+
+            alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+            switchTab('login');
+        }
+
+        function handleLogin() {
+            let inputId = document.getElementById('login-user').value.trim();
+            let pass = document.getElementById('login-pass').value.trim();
+
+            if(!inputId || !pass) {
+                alert('Vui lòng nhập tài khoản và mật khẩu!');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('hhm_users') || '[]');
+            let found = users.find(u => (u.username === inputId || u.email === inputId) && u.password === pass);
+
+            if (!found) {
+                alert('Sai tên đăng nhập/email hoặc mật khẩu!');
+                return;
+            }
+
+            currentUser = found;
+            if(!currentUser.depositHistory) currentUser.depositHistory = [];
+            localStorage.setItem('hhm_current_user', JSON.stringify(currentUser));
+            alert('Đăng nhập thành công!');
+            updateAuthSlot();
+            switchTab('shop');
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('hhm_current_user');
+            updateAuthSlot();
+            switchTab('shop');
+        }
+
+        function updateAuthSlot() {
+            let slot = document.getElementById('auth-slot');
+            if(currentUser) {
+                slot.innerHTML = `<div style="font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px; background:var(--tag-bg); padding:4px 8px; border-radius:20px;">
+                    <span>${currentUser.username} (${formatMoney(currentUser.balance)})</span>
+                    <button onclick="handleLogout()" style="background:var(--danger); color:#fff; border:none; padding:2px 6px; border-radius:4px; font-size:10px; cursor:pointer;">Thoát</button>
+                </div>`;
+            } else {
+                slot.innerHTML = `<button class="btn-auth-outline" onclick="switchTab('login')">Đăng nhập</button><button class="btn-auth-primary" onclick="switchTab('register')">Đăng ký</button>`;
+            }
+        }
+
+        function buyItem(id) {
+            if(!currentUser) {
+                alert('Vui lòng đăng nhập tài khoản để thực hiện mua hàng!');
+                switchTab('login');
+                return;
+            }
+
+            let item = products.find(p => p.id === id);
+            if(currentUser.balance < item.price) {
+                alert('Số dư ví của bạn không đủ để mua sản phẩm này! Vui lòng tạo lệnh nạp thêm tiền.');
+                openDepositModal();
+                return;
+            }
+            if(item.stock <= 0) {
+                alert('Sản phẩm đã hết hàng!');
+                return;
+            }
+
+            currentUser.balance -= item.price;
+            item.stock--;
+            let orderCode = 'HHM' + Math.floor(1000 + Math.random() * 9000);
+
+            let newTransaction = {
+                code: orderCode,
+                name: item.name,
+                price: formatMoney(item.price),
+                data: item.stockData,
+                status: 'Thành công'
+            };
+
+            if(!currentUser.history) currentUser.history = [];
+            currentUser.history.unshift(newTransaction);
+
+            syncUserData();
+
+            updateAuthSlot();
+            document.getElementById('modal-stock-data').innerText = item.stockData;
+            document.getElementById('stock-modal').style.display = 'flex';
+            renderStore();
+        }
+
+        function syncUserData() {
+            localStorage.setItem('hhm_current_user', JSON.stringify(currentUser));
+            let users = JSON.parse(localStorage.getItem('hhm_users') || '[]');
+            let idx = users.findIndex(u => u.username === currentUser.username);
+            if(idx !== -1) {
+                users[idx] = currentUser;
+                localStorage.setItem('hhm_users', JSON.stringify(users));
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('stock-modal').style.display = 'none';
+            switchTab('history');
+        }
+
+        function openDepositModal() {
+            if(!currentUser) {
+                alert('Vui lòng đăng nhập tài khoản trước khi nạp tiền!');
+                switchTab('login');
+                return;
+            }
+            document.getElementById('deposit-modal').style.display = 'flex';
+            document.getElementById('deposit-step-1').style.display = 'block';
+            document.getElementById('deposit-step-2').style.display = 'none';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('deposit-modal').style.display = 'none';
+        }
+
+        function selectDepositAmount(amt) {
+            document.getElementById('deposit-custom-input').value = amt;
+            document.querySelectorAll('.deposit-preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function updatePresetHighlight(val) {
+            document.querySelectorAll('.deposit-preset-btn').forEach(btn => btn.classList.remove('active'));
+        }
+
+        function proceedToDepositDetails() {
+            let amount = parseInt(document.getElementById('deposit-custom-input').value);
+            if(!amount || amount < 10000) {
+                alert('Vui lòng nhập số tiền nạp tối thiểu là 10.000 đ!');
+                return;
+            }
+
+            document.getElementById('txt-amount-val').innerText = amount.toLocaleString('vi-VN') + ' đ';
+            let transferContent = `NAPTIEN ${amount}`;
+            document.getElementById('txt-transfer-content').innerText = transferContent;
+
+            let qrImgUrl = `https://img.vietqr.io/image/VPB-AGBHENO60707154950-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(transferContent)}`;
+            document.getElementById('dynamic-qr-img').src = qrImgUrl;
+
+            document.getElementById('deposit-step-1').style.display = 'none';
+            document.getElementById('deposit-step-2').style.display = 'block';
+        }
+
+        function resetDepositStep() {
+            document.getElementById('deposit-step-1').style.display = 'block';
+            document.getElementById('deposit-step-2').style.display = 'none';
+        }
+
+        function submitDepositDone() {
+            closeDepositModal();
+            let amount = parseInt(document.getElementById('deposit-custom-input').value) || 0;
+            
+            if(currentUser) {
+                if(!currentUser.depositHistory) currentUser.depositHistory = [];
+                let depositCode = 'GD' + Math.floor(10000 + Math.random() * 90000);
+                
+                currentUser.depositHistory.unshift({
+                    code: depositCode,
+                    amount: amount.toLocaleString('vi-VN') + ' đ',
+                    content: `NAPTIEN ${amount}`,
+                    status: 'Đang xử lý'
+                });
+                
+                syncUserData();
+            }
+
+            document.getElementById('modern-toast').style.display = 'flex';
+        }
+
+        function closeModernToast() {
+            document.getElementById('modern-toast').style.display = 'none';
+            openDepositHistoryModal();
+        }
+
+        function openDepositHistoryModal() {
+            if(!currentUser) {
+                alert('Vui lòng đăng nhập tài khoản để xem lịch sử nạp tiền!');
+                switchTab('login');
+                return;
+            }
+            renderDepositHistory();
+            document.getElementById('deposit-history-modal').style.display = 'flex';
+        }
+
+        function closeDepositHistoryModal() {
+            document.getElementById('deposit-history-modal').style.display = 'none';
+        }
+
+        function renderDepositHistory() {
+            let tbody = document.getElementById('deposit-history-tbody');
+            if(!currentUser || !currentUser.depositHistory || currentUser.depositHistory.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:15px; color:var(--text-sub);">Chưa có lịch sử nạp tiền nào.</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            currentUser.depositHistory.forEach(d => {
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700;">#${d.code}</td>
+                    <td style="padding:8px; color:var(--primary); font-weight:700;">${d.amount}</td>
+                    <td style="padding:8px; font-family:monospace;">${d.content}</td>
+                    <td style="padding:8px;"><span class="badge-pending">⏳ ${d.status}</span></td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function renderHistory() {
+            let tbody = document.getElementById('history-tbody');
+            let badge = document.getElementById('history-badge');
+            
+            if(!currentUser || !currentUser.history || currentUser.history.length === 0) {
+                badge.innerText = '0';
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:15px; color:var(--text-sub);">Chưa có giao dịch mua hàng nào. Vui lòng đăng nhập để xem.</td></tr>`;
+                return;
+            }
+
+            badge.innerText = currentUser.history.length;
+            let html = '';
+            currentUser.history.forEach(h => {
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700;">#${h.code}</td>
+                    <td style="padding:8px;">${h.name}</td>
+                    <td style="padding:8px; color:var(--primary);">${h.price}</td>
+                    <td style="padding:8px; font-family:monospace; color:var(--primary);">
+                        ${h.data} <button class="btn-copy-mini" onclick="copyToClipboard('${h.data}')">Copy</button>
+                    </td>
+                    <td style="padding:8px; color:var(--success);">✓ ${h.status}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
