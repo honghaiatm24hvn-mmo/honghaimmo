@@ -1976,8 +1976,16 @@
             document.getElementById('deposit-history-modal').style.display = 'flex';
         }
 
-        function closeDepositHistoryModal() {
-            document.getElementById('deposit-history-modal').style.display = 'none';
+        function closeWelcomePopup() {
+    document.getElementById('welcome-popup').style.display = 'none';
+
+    const music = document.getElementById("bgMusic");
+    music.currentTime = 0;
+    music.loop = false;
+    music.play();
+
+    startSnowfall();
+}
         }
 
         function renderDepositHistory() {
@@ -2026,4 +2034,7 @@
         }
     </script>
 </body>
+   <audio id="bgMusic">
+    <source src="snaptik_7661926944866323732_v3.mp4" type="audio/mp4">
+</audio> 
 </html>
