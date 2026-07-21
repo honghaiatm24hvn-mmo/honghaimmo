@@ -1980,11 +1980,14 @@
     document.getElementById('welcome-popup').style.display = 'none';
 
     const music = document.getElementById("bgMusic");
-    music.currentTime = 0;
-    music.loop = false;
-    music.play();
+    if (music) {
+        music.currentTime = 0;
+        music.loop = false;
+        music.play().catch(() => {});
+    }
 
     startSnowfall();
+}
 }
         }
 
