@@ -952,12 +952,12 @@
             padding: 12px;
             border-radius: 12px;
             margin-bottom: 12px;
-            width: 180px;
+            width: 200px;
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .qr-box-center img { width: 150px; height: 150px; display: block; margin: 0 auto; }
+        .qr-box-center img { width: 176px; height: 176px; display: block; margin: 0 auto; object-fit: contain; }
         .qr-subtext { text-align: center; font-size: 11px; color: var(--text-sub); margin-bottom: 12px; }
 
         .content-transfer-box {
@@ -1207,14 +1207,14 @@
         </div>
     </div>
 
-    <!-- MODAL NẠP TIỀN HOÀN CHỈNH -->
+    <!-- MODAL NẠP TIỀN HOÀN CHỈNH (ZALOPAY) -->
     <div id="deposit-modal" class="deposit-modal-container">
         <div class="deposit-modal-box">
             <div class="deposit-close-btn" onclick="closeDepositModal()">✕</div>
             
             <div id="deposit-step-1">
                 <div class="deposit-header-title">
-                    <span style="font-size:18px;">🏛️</span> Thông tin chuyển khoản
+                    <span style="font-size:18px;">💳</span> Nạp tiền qua ZaloPay
                 </div>
 
                 <div class="deposit-notice-card">
@@ -1244,11 +1244,11 @@
                 </button>
             </div>
 
-            <!-- STEP 2: THÔNG TIN CHI TIẾT CHUYỂN KHOẢN -->
+            <!-- STEP 2: THÔNG TIN CHI TIẾT CHUYỂN KHOẢN ZALOPAY -->
             <div id="deposit-step-2" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <div class="deposit-header-title" style="margin-bottom:0;">
-                        <span style="font-size:18px;">🏛️</span> Thông tin chuyển khoản
+                        <span style="font-size:18px;">💳</span> Quét mã ZaloPay nạp tiền
                     </div>
                     <div style="display:flex; gap:12px; font-size:11px; color:var(--text-sub); cursor:pointer;">
                         <span onclick="resetDepositStep()" style="display:flex; align-items:center; gap:2px;">🔄 Đổi số tiền</span>
@@ -1257,22 +1257,15 @@
 
                 <div class="bank-info-table">
                     <div class="bank-info-row">
-                        <span class="bank-row-title">Ngân hàng</span>
-                        <span class="bank-row-val">VPB</span>
-                    </div>
-                    <div class="bank-info-row">
-                        <span class="bank-row-title">Số tài khoản</span>
-                        <span class="bank-row-val">
-                            <span id="txt-stk">AGBHENO60707154950</span>
-                            <button class="btn-copy-mini" onclick="copyToClipboard('AGBHENO60707154950')">Copy</button>
-                        </span>
+                        <span class="bank-row-title">Ví / Ngân hàng</span>
+                        <span class="bank-row-val" style="color:var(--pink-accent);">Zalopay_Dang Hong Hai</span>
                     </div>
                     <div class="bank-info-row">
                         <span class="bank-row-title">Chủ tài khoản</span>
-                        <span class="bank-row-val">HOANG GIA DU</span>
+                        <span class="bank-row-val">DANG HONG HAI</span>
                     </div>
                     <div class="bank-info-row">
-                        <span class="bank-row-title">Số tiền</span>
+                        <span class="bank-row-title">Số tiền nạp</span>
                         <span class="bank-row-val" style="color:var(--pink-accent);">
                             <span id="txt-amount-val">100.000 đ</span>
                             <button class="btn-copy-mini" onclick="copyToClipboard(document.getElementById('txt-amount-val').innerText)">Copy</button>
@@ -1280,12 +1273,13 @@
                     </div>
                 </div>
 
+                <!-- HIỂN THỊ ẢNH QR ĐÃ CUNG CẤP: IMG_0062.png -->
                 <div class="qr-box-center">
-                    <img id="dynamic-qr-img" src="" alt="VietQR">
+                    <img src="IMG_0062.png" alt="ZaloPay QR Code DANG HONG HAI">
                 </div>
-                <div class="qr-subtext">Quét QR để chuyển khoản</div>
+                <div class="qr-subtext">Mở ứng dụng ZaloPay hoặc Ngân hàng quét mã QR trên</div>
 
-                <div style="font-size:11px; color:var(--text-sub); margin-bottom:4px;">Nội dung chuyển khoản</div>
+                <div style="font-size:11px; color:var(--text-sub); margin-bottom:4px;">Nội dung chuyển khoản (Bắt buộc)</div>
                 <div class="content-transfer-box">
                     <span id="txt-transfer-content" class="transfer-content-text">NAPTIEN 100000</span>
                     <button class="btn-copy-mini" onclick="copyToClipboard(document.getElementById('txt-transfer-content').innerText)">Copy</button>
@@ -1303,7 +1297,7 @@
                 <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main);">📜 Lịch sử nạp tiền của bạn</h3>
                 <span onclick="closeDepositHistoryModal()" style="font-size: 18px; cursor: pointer; color: var(--text-sub); font-weight: 700;">✕</span>
             </div>
-            <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">Các lệnh nạp tiền mới tạo sẽ ở trạng thái <strong style="color:var(--pending);">Đang xử lý</strong> và chưa được cộng tiền tự động.</p>
+            <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">Các lệnh nạp tiền mới tạo sẽ ở trạng thái <strong style="color:var(--pending);">Đang xử lý</strong> và chờ Admin duyệt.</p>
             <div style="background:var(--bg-deep); border:1px solid var(--border-glass); border-radius:10px; overflow-x:auto; padding:6px; max-height:280px; overflow-y:auto;">
                 <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left;">
                     <thead>
@@ -1329,7 +1323,7 @@
             <div class="toast-icon-circle">⏳</div>
             <h3 style="font-size:16px; font-weight:800; margin-bottom:8px; color:var(--text-main);">Đã ghi nhận giao dịch</h3>
             <p style="font-size:12px; color:var(--text-sub); line-height:1.5; margin-bottom:20px;">
-                Hệ thống đã ghi nhận lệnh nạp của bạn. Trạng thái hiện tại là <strong>Đang xử lý</strong> và số dư chưa được cộng.
+                Hệ thống đã ghi nhận lệnh nạp của bạn. Trạng thái hiện tại là <strong>Đang xử lý</strong> và số dư sẽ được cộng sau khi xác nhận.
             </p>
             <button class="btn-pink-action" onclick="closeModernToast()">Kiểm tra lịch sử nạp</button>
         </div>
@@ -1475,12 +1469,11 @@
                 let snow = document.createElement('div');
                 snow.classList.add('snowflake');
                 
-                // Random kích thước, vị trí xuất hiện, tốc độ rơi và độ mờ
                 let size = Math.random() * 6 + 3 + 'px';
                 snow.style.width = size;
                 snow.style.height = size;
                 snow.style.left = Math.random() * 100 + 'vw';
-                snow.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Tốc độ rơi từ 3 đến 7 giây
+                snow.style.animationDuration = (Math.random() * 4 + 3) + 's';
                 snow.style.animationDelay = (Math.random() * 5) + 's';
                 snow.style.opacity = Math.random() * 0.7 + 0.3;
 
@@ -1937,9 +1930,6 @@
             document.getElementById('txt-amount-val').innerText = amount.toLocaleString('vi-VN') + ' đ';
             let transferContent = `NAPTIEN ${amount}`;
             document.getElementById('txt-transfer-content').innerText = transferContent;
-
-            let qrImgUrl = `https://img.vietqr.io/image/VPB-AGBHENO60707154950-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(transferContent)}`;
-            document.getElementById('dynamic-qr-img').src = qrImgUrl;
 
             document.getElementById('deposit-step-1').style.display = 'none';
             document.getElementById('deposit-step-2').style.display = 'block';
