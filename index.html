@@ -2025,10 +2025,14 @@
             tbody.innerHTML = html;
         }
     </script>
-</body>
-   <audio controls autoplay loop>
-    <source src="snaptik.vn_7116780550689459482.mp3" type="audio/mp4">
-    Trình duyệt của bạn không hỗ trợ thẻ audio.
+    <audio id="bgMusic" autoplay loop>
+    <source src="nhac.mp3" type="audio/mpeg">
 </audio>
- 
+
+<script>
+window.addEventListener("click", function () {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+</script>
+</body>
 </html>
