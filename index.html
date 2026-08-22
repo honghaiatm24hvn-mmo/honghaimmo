@@ -1549,7 +1549,7 @@
     <section class="hero">
         <h1>Hồng Hải <span>OKVIP</span><br>Thời Trang Chính Hãng Giá Rẻ 👍</h1>
         <p>Màu sắc rực rỡ cực hiện đại - Thế giới quần áo và túi đeo chéo chuẩn Real 100%.</p>
-        <a href="#products" class="hero-btn">Khám phá ngay</a>
+        <a href="#products" class="hero-btn" onclick="playMusicOnAction()">Khám phá ngay</a>
     </section>
 
     <div class="marquee-container">
@@ -1776,6 +1776,14 @@
                 musicBtnText.innerText = "Bật Nhạc";
                 musicIcon.classList.remove('playing');
             }
+        }
+
+        function playMusicOnAction() {
+            const music = document.getElementById('bgMusic');
+            music.play().then(() => {
+                document.getElementById('musicBtnText').innerText = "Tắt Nhạc";
+                document.getElementById('musicIcon').classList.add('playing');
+            }).catch(e => console.log("Autoplay blocked"));
         }
 
         function generateCaptchas() {
