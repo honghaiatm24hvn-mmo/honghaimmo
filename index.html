@@ -1450,12 +1450,11 @@
             <h2 class="modal-title">Quét Mã QR Chuyển Khoản</h2>
             <div class="qr-container">
                 <div class="qr-box">
-                    <img id="qrImage" src="" alt="Mã QR Chuyển Khoản">
+                    <img id="qrImage" src="IMG_1356.png" alt="Mã QR Chuyển Khoản ZaloPay DANG HONG HAI">
                 </div>
                 <div class="transfer-info">
-                    <p>Ngân hàng: <span>MB Bank</span></p>
-                    <p>Số tài khoản: <span>0866057398</span></p>
-                    <p>Chủ tài khoản: <span>HONG HAI STORE</span></p>
+                    <p>Ví điện tử: <span>ZaloPay</span></p>
+                    <p>Chủ tài khoản: <span>DANG HONG HAI</span></p>
                     <p>Số tiền: <span id="qrAmountText" style="color: #dc2626; font-size: 14px;"></span></p>
                     <p>Nội dung: <span id="qrContentText"></span></p>
                 </div>
@@ -2054,7 +2053,6 @@
             let content = `ck${selectedAmount}`;
             document.getElementById('qrAmountText').innerText = selectedAmount.toLocaleString('vi-VN') + ' đ';
             document.getElementById('qrContentText').innerText = content;
-            document.getElementById('qrImage').src = `https://api.vietqr.io/image/970422-0866057398-compact2.jpg?amount=${selectedAmount}&addInfo=${content}&accountName=HONG%20HAI`;
             openModal('qrModal');
         }
 
