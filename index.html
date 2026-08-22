@@ -1301,8 +1301,8 @@
             </ul>
             <div class="nav-right" id="authNavArea">
                 <button class="info-btn-header" onclick="openModal('infoModal')">🚚 ĐỊA CHỈ</button>
-                <button class="auth-btn btn-login" onclick="openModal('authModal'); switchModal('login');">Đăng nhập</button>
-                <button class="auth-btn btn-register" onclick="openModal('authModal'); switchModal('register');">Đăng ký</button>
+                <button class="auth-btn btn-login" onclick="openAuthModal('login')">Đăng nhập</button>
+                <button class="auth-btn btn-register" onclick="openAuthModal('register')">Đăng ký</button>
             </div>
         </div>
     </header>
@@ -1361,6 +1361,10 @@
                         <label>Mật khẩu</label>
                         <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
                     </div>
+                    <div class="form-group">
+                        <label id="loginCaptchaLabel" style="color: var(--accent-color); font-weight: 700;">Xác minh Robot: ?</label>
+                        <input type="number" id="loginCaptchaInput" placeholder="Nhập kết quả phép tính" required>
+                    </div>
                     <button type="submit" class="modal-submit-btn">Đăng Nhập</button>
                 </form>
                 <div class="modal-switch">
@@ -1373,19 +1377,23 @@
                 <form id="registerForm" onsubmit="handleRegister(event)">
                     <div class="form-group">
                         <label>Tên đăng nhập</label>
-                        <input type="text" id="regUsername" placeholder="Nhập tên đăng nhập độc nhất" required>
+                        <input type="text" id="regUsername" placeholder="4-20 ký tự, không khoảng trắng/ký tự đặc biệt" required>
                     </div>
                     <div class="form-group">
                         <label>Email cá nhân</label>
-                        <input type="email" id="regEmail" placeholder="Nhập email của bạn" required>
+                        <input type="email" id="regEmail" placeholder="Nhập đúng định dạng email" required>
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="tel" id="regPhone" placeholder="Nhập số điện thoại" required>
+                        <input type="tel" id="regPhone" placeholder="Đúng 10 chữ số, bắt đầu bằng số 0" required>
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input type="password" id="regPassword" placeholder="Tạo mật khẩu bảo mật" required>
+                        <input type="password" id="regPassword" placeholder="Ít nhất 8 ký tự, có chữ hoa & ký tự đặc biệt" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="regCaptchaLabel" style="color: var(--accent-color); font-weight: 700;">Xác minh Robot: ?</label>
+                        <input type="number" id="regCaptchaInput" placeholder="Nhập kết quả phép tính" required>
                     </div>
                     <button type="submit" class="modal-submit-btn">Đăng Ký</button>
                 </form>
@@ -1618,7 +1626,6 @@
                     { name: "XXL", stock: 8 }
                 ]
             },
-            /* 4 sản phẩm chính xác dùng hình ảnh thực tế của bạn */
             {
                 category: "Áo thể thao",
                 name: "Áo thể thao QQ88",
@@ -1672,6 +1679,9 @@
         let selectedProductToBuy = null;
         let selectedSizeObj = null;
         let selectedAmount = 100000;
+        
+        let loginCaptchaAnswer = 0;
+        let regCaptchaAnswer = 0;
 
         document.addEventListener("DOMContentLoaded", () => {
             checkLoginState();
@@ -1680,6 +1690,26 @@
             initRealtimeClock();
             setInterval(updateClockHands, 1000);
         });
+
+        function generateCaptchas() {
+            let n1 = Math.floor(Math.random() * 8) + 1;
+            let n2 = Math.floor(Math.random() * 8) + 1;
+            loginCaptchaAnswer = n1 + n2;
+            const lLbl = document.getElementById('loginCaptchaLabel');
+            if(lLbl) lLbl.innerText = `Xác minh Robot: ${n1} + ${n2} = ?`;
+
+            let m1 = Math.floor(Math.random() * 8) + 1;
+            let m2 = Math.floor(Math.random() * 8) + 1;
+            regCaptchaAnswer = m1 + m2;
+            const rLbl = document.getElementById('regCaptchaLabel');
+            if(rLbl) rLbl.innerText = `Xác minh Robot: ${m1} + ${m2} = ?`;
+        }
+
+        function openAuthModal(type) {
+            openModal('authModal');
+            switchModal(type);
+            generateCaptchas();
+        }
 
         function closeWelcomeAndStartTypewriter() {
             closeModal('welcomeModal');
@@ -1871,6 +1901,7 @@
                 loginContainer.style.display = 'none';
                 regContainer.style.display = 'block';
             }
+            generateCaptchas();
         }
 
         function getCurrentDateTime() {
@@ -1882,8 +1913,7 @@
             const loggedUser = localStorage.getItem('honghai_logged_in');
             if (!loggedUser) {
                 alert('⚠️ Vui lòng Đăng nhập để tiến hành mua hàng!');
-                openModal('authModal');
-                switchModal('login');
+                openAuthModal('login');
                 return;
             }
 
@@ -1955,10 +1985,50 @@
             const email = document.getElementById('regEmail').value.trim();
             const phone = document.getElementById('regPhone').value.trim();
             const password = document.getElementById('regPassword').value;
+            const captchaVal = parseInt(document.getElementById('regCaptchaInput').value);
+
+            // 1. Kiểm tra xác minh Robot
+            if (captchaVal !== regCaptchaAnswer) {
+                alert('❌ Xác minh Robot không chính xác, vui lòng thử lại!');
+                generateCaptchas();
+                return;
+            }
+
+            // 2. Kiểm tra định dạng tên tài khoản (tránh viết bừa, không khoảng trắng, đủ độ dài)
+            const usernameRegex = /^[a-zA-Z0-9_]{4,20}$/;
+            if (!usernameRegex.test(username)) {
+                alert('⚠️ Tên đăng nhập phải từ 4-20 ký tự, chỉ gồm chữ cái, số, dấu gạch dưới và không chứa khoảng trắng hay ký tự đặc biệt!');
+                return;
+            }
+
+            // 3. Kiểm tra định dạng Email chuẩn
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('⚠️ Định dạng email không hợp lệ!');
+                return;
+            }
+
+            // 4. Kiểm tra số điện thoại (đủ số, đúng 10 chữ số, bắt đầu bằng số 0)
+            const phoneRegex = /^0\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('⚠️ Số điện thoại phải bao gồm đúng 10 chữ số và bắt đầu bằng số 0!');
+                return;
+            }
+
+            // 5. Kiểm tra mật khẩu (ít nhất 1 chữ hoa, 1 ký tự đặc biệt, tối thiểu 8 ký tự)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert('⚠️ Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ cái viết hoa và 1 ký tự đặc biệt!');
+                return;
+            }
 
             let users = JSON.parse(localStorage.getItem('honghai_users')) || [];
+
+            // 6. Kiểm tra tính duy nhất (Mỗi tên, mỗi email, mỗi SĐT chỉ tạo được 1 tài khoản duy nhất)
             for (let u of users) {
-                if (u.username === username) { alert('⚠️ Tên đăng nhập đã tồn tại!'); return; }
+                if (u.username === username) { alert('⚠️ Tên đăng nhập này đã tồn tại!'); generateCaptchas(); return; }
+                if (u.email === email) { alert('⚠️ Email này đã được sử dụng cho một tài khoản khác!'); generateCaptchas(); return; }
+                if (u.phone === phone) { alert('⚠️ Số điện thoại này đã được sử dụng cho một tài khoản khác!'); generateCaptchas(); return; }
             }
 
             users.push({ username, email, phone, password, balance: 0 });
@@ -1972,6 +2042,14 @@
             e.preventDefault();
             const identifier = document.getElementById('loginIdentifier').value.trim();
             const password = document.getElementById('loginPassword').value;
+            const captchaVal = parseInt(document.getElementById('loginCaptchaInput').value);
+
+            // Kiểm tra xác minh Robot
+            if (captchaVal !== loginCaptchaAnswer) {
+                alert('❌ Xác minh Robot không chính xác, vui lòng thử lại!');
+                generateCaptchas();
+                return;
+            }
 
             let users = JSON.parse(localStorage.getItem('honghai_users')) || [];
             const validUser = users.find(u => (u.username === identifier || u.email === identifier) && u.password === password);
@@ -1984,6 +2062,7 @@
                 document.getElementById('loginForm').reset();
             } else {
                 alert('❌ Sai thông tin tài khoản hoặc mật khẩu!');
+                generateCaptchas();
             }
         }
 
@@ -2020,8 +2099,8 @@
             } else {
                 authNavArea.innerHTML = `
                     ${addressBtnHtml}
-                    <button class="auth-btn btn-login" onclick="openModal('authModal'); switchModal('login');">Đăng nhập</button>
-                    <button class="auth-btn btn-register" onclick="openModal('authModal'); switchModal('register');">Đăng ký</button>
+                    <button class="auth-btn btn-login" onclick="openAuthModal('login')">Đăng nhập</button>
+                    <button class="auth-btn btn-register" onclick="openAuthModal('register')">Đăng ký</button>
                 `;
             }
         }
