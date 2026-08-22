@@ -1610,7 +1610,7 @@
                 category: "Áo thể thao",
                 name: "Áo thể thao F168",
                 price: 370000,
-                image: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=600&auto=format&fit=crop",
+                image: "IMG_1365.jpeg",
                 sizes: [
                     { name: "M", stock: 43 },
                     { name: "L", stock: 17 },
@@ -1622,7 +1622,7 @@
                 category: "Áo thể thao",
                 name: "Áo thể thao FLY88",
                 price: 350000,
-                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+                image: "IMG_1368.jpeg",
                 sizes: [
                     { name: "M", stock: 43 },
                     { name: "L", stock: 17 },
@@ -1646,7 +1646,7 @@
                 category: "Túi đeo chéo",
                 name: "Túi đeo chéo F168",
                 price: 1350000,
-                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=600&auto=format&fit=crop",
+                image: "IMG_1364.jpeg",
                 sizes: [
                     { name: "M", stock: 20 },
                     { name: "L", stock: 10 },
@@ -1658,7 +1658,7 @@
                 category: "Túi đeo chéo",
                 name: "Túi đeo chéo FLY88",
                 price: 1250000,
-                image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=600&auto=format&fit=crop",
+                image: "IMG_1367.jpeg",
                 sizes: [
                     { name: "M", stock: 20 },
                     { name: "L", stock: 10 },
@@ -1680,7 +1680,6 @@
             setInterval(updateClockHands, 1000);
         });
 
-        // Xử lý hiệu ứng chữ chạy từng chữ bùng nổ kèm viền cầu vồng (đã xóa tính năng phát giọng nói AI)
         function closeWelcomeAndStartTypewriter() {
             closeModal('welcomeModal');
             const overlay = document.getElementById('typewriterOverlay');
@@ -1693,7 +1692,6 @@
             const fullText = "HONG HAI STORE mở bán đồ hãng okvip real , tất cả các cổng giá êm";
             let charIndex = 0;
 
-            // Chạy từng chữ có viền cầu vồng, tự động xuống dòng và không tràn màn hình
             const typingInterval = setInterval(() => {
                 if (charIndex < fullText.length) {
                     const span = document.createElement("span");
